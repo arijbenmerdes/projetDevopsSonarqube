@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 EXPOSE 8089
 
 # Copier le fichier .jar de ton application
-COPY target/tp-foyer-5.0.0.jar tp-foyer.jar
+COPY target/tp-foyer-${VERSION}.jar tp-foyer.jar
 
 # Définir la commande d'exécution de l'application Spring Boot
 ENTRYPOINT ["java", "-jar", "/tp-foyer.jar"]
