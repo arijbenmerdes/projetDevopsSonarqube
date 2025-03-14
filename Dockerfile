@@ -3,7 +3,10 @@ FROM openjdk:17-jdk-slim
 
 # Définir le port sur lequel l'application sera exposée
 EXPOSE 8089
-
+# Set the working directory in the container
+WORKDIR /app
+# Define the build argument for the version
+ARG VERSION
 # Copier le fichier .jar de ton application
 COPY target/tp-foyer-${VERSION}.jar tp-foyer.jar
 
