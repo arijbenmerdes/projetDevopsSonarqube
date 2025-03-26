@@ -11,4 +11,4 @@ ARG VERSION
 COPY target/tp-foyer-${VERSION}.jar tp-foyer.jar
 
 # Définir la commande d'exécution de l'application Spring Boot
-ENTRYPOINT ["java", "-jar", "app/tp-foyer.jar"]
+ENTRYPOINT ["java", "-jar", "/app/tp-foyer.jar"]
