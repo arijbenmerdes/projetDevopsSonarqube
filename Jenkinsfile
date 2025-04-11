@@ -103,4 +103,6 @@ pipeline {
                 body: "Le build a échoué.\n\nConsultez le détail du build ici: ${BUILD_URL}"
             )
         }
+    }
+        
 }
