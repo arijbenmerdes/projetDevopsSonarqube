@@ -55,9 +55,9 @@ services:
       ports:
         - "9104:9104"
       environment:
-        - DATA_SOURCE_NAME=root:root@(mysql-db:3306)/
+        - DATA_SOURCE_NAME=root:root@(db:3306)/
       depends_on:
-        - mysql-db
+        - db
 
 volumes:
   mysql_data:
