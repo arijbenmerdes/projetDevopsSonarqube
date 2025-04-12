@@ -31,6 +31,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
+                      sh 'docker start sonarqube'
                     // Analyser avec SonarQube
                     withSonarQubeEnv('SonarQube') { // Assurez-vous que 'SonarQube' est le nom de votre serveur SonarQube
                         sh 'mvn sonar:sonar -Dsonar.projectKey=projetDevopsSonarqube -Dsonar.projectName="projetDevopsSonarqube" -Dsonar.login=sqp_547896f73092aa1b0fd008535cdf2a29968eb58c'
@@ -42,6 +43,7 @@ pipeline {
          stage('Deploy to Nexus') {
                      steps {
                         script {
+                             sh 'docker start nexus'
                             // Déployer directement dans Nexus sans exécuter les tests
                              sh 'mvn deploy -DskipTests -DaltDeploymentRepository=deploymentRepo::default::http://localhost:8081/repository/maven-releases/'
                          }
