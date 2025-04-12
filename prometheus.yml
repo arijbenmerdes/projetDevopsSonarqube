@@ -1,0 +1,26 @@
+global:
+  scrape_interval: 15s  
+
+scrape_configs:
+  # Surveillance de Prometheus lui-même
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["192.168.50.4:9090"]
+
+  # Surveillance de Jenkins
+  - job_name: "jenkins"
+    metrics_path: "/prometheus"
+    static_configs:
+      - targets: ["192.168.50.4:8080"]
+
+  # Surveillance de l'application Spring Boot
+  - job_name: "springboot"
+    metrics_path: "/tpfoyer/actuator/prometheus"
+    static_configs:
+      - targets: ["192.168.50.4:8089"]
+
+  # Surveillance de MySQL via MySQL Exporter
+  - job_name: "mysql"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["mysql-exporter:9104"]
