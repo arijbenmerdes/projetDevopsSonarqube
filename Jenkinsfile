@@ -38,6 +38,15 @@ pipeline {
                 }
             }
         }
+
+         stage('Deploy to Nexus') {
+                     steps {
+                        script {
+                            // Déployer directement dans Nexus sans exécuter les tests
+                             sh 'mvn deploy -DskipTests -DaltDeploymentRepository=deploymentRepo::default::http://localhost:8081/repository/maven-releases/'
+                         }
+                     }
+                 }
        stage('Start Prometheus & Grafana') {
            steps {
                script {
@@ -64,14 +73,7 @@ pipeline {
             }
         }
 
-        // stage('Deploy to Nexus') {
-        //     steps {
-        //         script {
-        //             // Déployer directement dans Nexus sans exécuter les tests
-        //             sh 'mvn deploy -DskipTests -DaltDeploymentRepository=deploymentRepo::default::http://localhost:8081/repository/maven-releases/'
-        //         }
-        //     }
-        // }
+
 
         // stage('Build Docker Image') {
         //     steps {
