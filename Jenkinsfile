@@ -1,5 +1,6 @@
 pipeline {
-    agent any
+
+    agent any 
     environment {
         DOCKER_USERNAME = credentials('DOCKER_CREDENTIALS')  // Utilise l'ID de ton credential Docker Hub
         DOCKER_PASSWORD = credentials('DOCKER_CREDENTIALS')  // Utilise le même ID ici
@@ -55,7 +56,6 @@ pipeline {
             }
         }
 
-
         // stage('Deploy to Nexus') {
         //     steps {
         //         script {
@@ -106,3 +106,4 @@ pipeline {
     }
 
 }
+
