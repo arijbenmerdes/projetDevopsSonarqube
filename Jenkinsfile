@@ -45,7 +45,7 @@ pipeline {
                }
            }
        }
-        }
+
         stage('Build Docker Images with Docker Compose') {
             steps {
                 script {
