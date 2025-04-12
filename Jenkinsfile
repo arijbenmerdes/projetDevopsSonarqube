@@ -40,15 +40,15 @@ pipeline {
             }
         }
 
-         stage('Deploy to Nexus') {
-                     steps {
-                        script {
-                             sh 'docker start nexus'
+        // stage('Deploy to Nexus') {
+                  //    steps {
+                  //      script {
+                  //          sh 'docker start nexus'
                             // Déployer directement dans Nexus sans exécuter les tests
-                             sh 'mvn deploy -DskipTests -DaltDeploymentRepository=deploymentRepo::default::http://localhost:8081/repository/maven-releases/'
-                         }
-                     }
-                 }
+                           //  sh 'mvn deploy -DskipTests -DaltDeploymentRepository=deploymentRepo::default::http://localhost:8081/repository/maven-releases/'
+                       //  }
+                    // }
+                // }
        stage('Start Prometheus & Grafana') {
            steps {
                script {
