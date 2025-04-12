@@ -28,6 +28,14 @@ pipeline {
                 sh 'mvn compile'
             }
         }
+        stage('Run Unit Tests') {
+                    steps {
+                        script {
+                            echo " Exécution des tests JUnit et Mockito..."
+                            sh 'mvn test'
+                        }
+                    }
+         }
         stage('SonarQube Analysis') {
             steps {
                 script {
