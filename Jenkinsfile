@@ -6,10 +6,8 @@ pipeline {
         }
     environment {
         DOCKER_CREDENTIALS = credentials('DOCKER_CREDENTIALS')  // Utilise l'ID de ton credential Docker Hub
-       // DOCKER_PASSWORD = credentials('DOCKER_CREDENTIALS')  // Utilise le même ID ici
         SONAR_TOKEN = credentials('SONAR_TOKEN')
-        SONAR_USERNAME = credentials('sonar_credentials')
-        SONAR_PASSWORD = credentials('sonar_credentials')
+
 
          VERSION = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
 
