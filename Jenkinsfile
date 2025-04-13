@@ -108,20 +108,11 @@ stage('Start Prometheus & Grafana') {
 
     post {
         success {
-            echo 'Analyse SonarQube terminée avec succès.'
-            emailext (
-                to: 'arij2000bms@gmail.com',
-                subject: "Build Success: ${currentBuild.fullDisplayName}",
-                body: "Le build a réussi.\n\nConsultez le détail du build ici: ${BUILD_URL}"
-            )
+            echo 'Analyse  terminée avec succès.'
+
         }
         failure {
-            echo 'L\'analyse SonarQube a échoué.'
-            emailext (
-                to: 'arij2000bms@gmail.com',
-                subject: "Build Failed: ${currentBuild.fullDisplayName}",
-                body: "Le build a échoué.\n\nConsultez le détail du build ici: ${BUILD_URL}"
-            )
+            echo 'L\'analyse  a échoué.'
         }
     }
 
