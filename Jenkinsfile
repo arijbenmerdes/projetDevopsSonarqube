@@ -4,7 +4,8 @@ pipeline {
     environment {
         DOCKER_USERNAME = credentials('DOCKER_CREDENTIALS')  // Utilise l'ID de ton credential Docker Hub
         DOCKER_PASSWORD = credentials('DOCKER_CREDENTIALS')  // Utilise le même ID ici
-        VERSION = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
+        SONAR_TOKEN = credentials('SONAR_TOKEN')
+         VERSION = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
 
     }
 
@@ -42,7 +43,7 @@ pipeline {
                       sh 'docker start sonarqube'
                     // Analyser avec SonarQube
                     withSonarQubeEnv('SonarQube') { // Assurez-vous que 'SonarQube' est le nom de votre serveur SonarQube
-                        sh 'mvn sonar:sonar -Dsonar.projectKey=projetDevopsSonarqube -Dsonar.projectName="projetDevopsSonarqube" -Dsonar.login=sqp_547896f73092aa1b0fd008535cdf2a29968eb58c'
+                        sh 'mvn sonar:sonar -Dsonar.projectKey=projetDevopsSonarqube -Dsonar.projectName="projetDevopsSonarqube" -Dsonar.host.url=http://192.168.50.4:9000 -Dsonar.login=$SONAR_TOKEN'
                     }
                 }
             }
