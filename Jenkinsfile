@@ -5,8 +5,8 @@ pipeline {
             githubPush()
         }
     environment {
-        DOCKER_USERNAME = credentials('DOCKER_CREDENTIALS')  // Utilise l'ID de ton credential Docker Hub
-        DOCKER_PASSWORD = credentials('DOCKER_CREDENTIALS')  // Utilise le même ID ici
+        DOCKER_CREDENTIALS = credentials('DOCKER_CREDENTIALS')  // Utilise l'ID de ton credential Docker Hub
+       // DOCKER_PASSWORD = credentials('DOCKER_CREDENTIALS')  // Utilise le même ID ici
         SONAR_TOKEN = credentials('SONAR_TOKEN')
         SONAR_USERNAME = credentials('sonar_credentials')
         SONAR_PASSWORD = credentials('sonar_credentials')
@@ -105,7 +105,7 @@ stage('Start Prometheus & Grafana') {
                  script {
                      // Connecter à Docker Hub en utilisant les credentials stockés dans Jenkins
 
-                     sh 'echo "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_USERNAME" --password-stdin'
+                     sh 'echo "$DOCKER_CREDENTIALS_PSW" | docker login -u "$DOCKER_CREDENTIALS_USR" --password-stdin'
                      sh 'sudo docker tag tp-foyer:${VERSION} arijbms/tp-foyer:${VERSION}'
                      sh 'sudo docker push arijbms/tp-foyer:${VERSION}'
                  }
