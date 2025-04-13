@@ -1,6 +1,9 @@
 pipeline {
 
-    agent any 
+    agent any
+     triggers {
+            githubPush()
+        }
     environment {
         DOCKER_USERNAME = credentials('DOCKER_CREDENTIALS')  // Utilise l'ID de ton credential Docker Hub
         DOCKER_PASSWORD = credentials('DOCKER_CREDENTIALS')  // Utilise le même ID ici
@@ -97,17 +100,17 @@ stage('Start Prometheus & Grafana') {
         //         }
         //     }
         // }
-        // stage('Push Docker Image') {
-        //     steps {
-        //         script {
-        //             // Connecter à Docker Hub en utilisant les credentials stockés dans Jenkins
+          stage('Push Docker Image') {
+             steps {
+                 script {
+                     // Connecter à Docker Hub en utilisant les credentials stockés dans Jenkins
 
-        //             sh 'echo "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_USERNAME" --password-stdin'
-        //             sh 'sudo docker tag tp-foyer:${VERSION} arijbms/tp-foyer:${VERSION}'
-        //             sh 'sudo docker push arijbms/tp-foyer:${VERSION}'
-        //         }
-        //     }
-        // }
+                     sh 'echo "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_USERNAME" --password-stdin'
+                     sh 'sudo docker tag tp-foyer:${VERSION} arijbms/tp-foyer:${VERSION}'
+                     sh 'sudo docker push arijbms/tp-foyer:${VERSION}'
+                 }
+             }
+         }
     }
 
     post {
