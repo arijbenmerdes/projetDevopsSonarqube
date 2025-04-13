@@ -58,13 +58,7 @@ pipeline {
                        //  }
                     // }
                 // }
-       stage('Start Prometheus & Grafana') {
-           steps {
-               script {
-                   sh 'docker start prometheus grafana'
-               }
-           }
-       }
+
 
         stage('Build Docker Images with Docker Compose') {
             steps {
@@ -84,7 +78,13 @@ pipeline {
             }
         }
 
-
+stage('Start Prometheus & Grafana') {
+           steps {
+               script {
+                   sh 'docker start prometheus grafana'
+               }
+           }
+       }
 
         // stage('Build Docker Image') {
         //     steps {
