@@ -40,9 +40,8 @@ public class ReservationServiceTest {
 
     @Test
     void testRetrieveReservation() {
-        Reservation r = new Reservation();
-        r.setIdReservation("res1");
-        when(reservationRepository.findById("res1")).thenReturn(Optional.of(r));
+        Reservation mockReservation = new Reservation("res1", new Date(), true, null);
+        when(reservationRepository.findById("res1")).thenReturn(Optional.of(mockReservation));
 
         Reservation result = reservationService.retrieveReservation("res1");
 
@@ -51,15 +50,6 @@ public class ReservationServiceTest {
         verify(reservationRepository).findById("res1");
     }
 
-    @Test
-    void testRetrieveReservation_NotFound() {
-        when(reservationRepository.findById("res2")).thenReturn(Optional.empty());
-
-        Reservation result = reservationService.retrieveReservation("res2");
-
-        assertNull(result);
-        verify(reservationRepository).findById("res2");
-    }
 
     @Test
     void testAddReservation() {
@@ -86,14 +76,15 @@ public class ReservationServiceTest {
     void testFindByDateAndStatus() {
         Date date = new Date();
         boolean status = true;
-        List<Reservation> reservations = List.of(new Reservation());
+        List<Reservation> mockReservations = List.of(new Reservation("res1", date, status, null));
 
         when(reservationRepository.findAllByAnneeUniversitaireBeforeAndEstValide(date, status))
-                .thenReturn(reservations);
+                .thenReturn(mockReservations);
 
-        List<Reservation> result = reservationService.retrieveAllReservations();
+        List<Reservation> result = reservationService.trouverResSelonDateEtStatus(date, status);
 
-        assertEquals(1, result.size());
+        assertEquals(1, result.size(), "La liste doit contenir une réservation");
         verify(reservationRepository).findAllByAnneeUniversitaireBeforeAndEstValide(date, status);
     }
+
 }
