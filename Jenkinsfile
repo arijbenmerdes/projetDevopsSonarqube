@@ -92,14 +92,7 @@ stage('Start Prometheus & Grafana') {
            }
        }
 
-        // stage('Build Docker Image') {
-        //     steps {
-        //         script {
-        //             // Construire l'image Docker en passant l'argument VERSION
-        //             sh "sudo docker build --build-arg VERSION=${VERSION} -t tp-foyer:${VERSION} ."
-        //         }
-        //     }
-        // }
+
           stage('Push Docker Image') {
              steps {
                  script {
