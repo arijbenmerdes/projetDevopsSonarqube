@@ -86,6 +86,8 @@ stage('Start Prometheus & Grafana') {
            steps {
                script {
                    sh 'docker start prometheus grafana'
+
+
                }
            }
        }
